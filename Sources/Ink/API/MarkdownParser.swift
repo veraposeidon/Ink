@@ -138,6 +138,7 @@ private extension MarkdownParser {
             return HorizontalLine.self
         case "-", "*", "+", \.isNumber: return List.self
         case "|": return Table.self
+        case "$": return EquationBlock.self
         default: return Paragraph.self
         }
     }
