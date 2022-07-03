@@ -54,5 +54,6 @@ public extension Modifier {
         case paragraphs
         case tables
         case equations
+        case inlineMath
     }
 }

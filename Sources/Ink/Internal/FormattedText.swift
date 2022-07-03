@@ -115,7 +115,7 @@ private extension FormattedText {
                             continue
                         }
 
-                        guard !nextCharacter.isAny(of: ["\n", "#", "<", "`"]) else {
+                        guard !nextCharacter.isAny(of: ["\n", "#", "<", "`", "$"]) else {
                             break
                         }
 
@@ -334,6 +334,7 @@ private extension FormattedText {
             case "[": return Link.self
             case "!": return Image.self
             case "<": return HTML.self
+            case "$": return InlineMath.self
             default: return nil
             }
         }
