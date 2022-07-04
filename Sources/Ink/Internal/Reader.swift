@@ -178,3 +178,29 @@ private extension Reader {
         return string[nextIndex]
     }
 }
+
+extension Reader {
+    /// four whitespaces means code block
+    mutating func discardWhitespacesAndNewlinesExceptCodeBlockIndent() {
+        while !didReachEnd {
+            guard !isCodeBlockIndent() else { return }
+            guard currentCharacter.isWhitespace else { return }
+            advanceIndex()
+        }
+    }
+
+    /// To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab
+    /// - Returns: if it is a codeblock indent
+    mutating func isCodeBlockIndent() -> Bool {
+        guard previousCharacter != nil, previousCharacter!.isNewline else { return false }
+        let whiteSpaceCount = readCount(of: " ")
+        let isCodeIndent = whiteSpaceCount == 4
+        for _ in 0..<whiteSpaceCount {
+            rewindIndex()
+        }
+        if isCodeIndent {
+            print("wow")
+        }
+        return isCodeIndent
+    }
+}

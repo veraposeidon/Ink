@@ -47,7 +47,7 @@ public struct MarkdownParser {
         var metadata: Metadata?
 
         while !reader.didReachEnd {
-            reader.discardWhitespacesAndNewlines()
+            reader.discardWhitespacesAndNewlinesExceptCodeBlockIndent()
             guard !reader.didReachEnd else { break }
 
             do {
