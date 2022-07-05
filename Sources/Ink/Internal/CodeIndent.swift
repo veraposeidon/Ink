@@ -1,6 +1,6 @@
 //
 //  CodeIndent.swift
-//  
+//
 //
 //  Created by shenxiaohai on 2022/7/5.
 //
@@ -37,12 +37,15 @@ internal struct CodeIndent: Fragment {
 
             reader.advanceIndex()
         }
-
+        while code.last == "\n" {
+            code.remove(at: code.index(before: code.endIndex))
+        }
         return CodeIndent(code: code)
     }
 
     func html(usingURLs urls: NamedURLCollection,
-              modifiers: ModifierCollection) -> String {
+              modifiers: ModifierCollection) -> String
+    {
         return "<pre><code>\(code)</code></pre>"
     }
 
