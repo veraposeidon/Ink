@@ -55,5 +55,6 @@ public extension Modifier {
         case tables
         case equations
         case inlineMath
+        case codeIndent
     }
 }

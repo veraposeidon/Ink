@@ -189,7 +189,7 @@ extension Reader {
         }
     }
 
-    /// To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab
+    /// To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab.
     /// - Returns: if it is a codeblock indent
     mutating func isCodeBlockIndent() -> Bool {
         guard previousCharacter != nil, previousCharacter!.isNewline else { return false }
@@ -198,9 +198,7 @@ extension Reader {
         for _ in 0..<whiteSpaceCount {
             rewindIndex()
         }
-        if isCodeIndent {
-            print("wow")
-        }
+
         return isCodeIndent
     }
 }
