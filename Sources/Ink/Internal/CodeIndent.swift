@@ -20,7 +20,6 @@ internal struct CodeIndent: Fragment {
         while !reader.didReachEnd {
             if code.last == "\n" {
                 let markerCount = reader.readCount(of: marker)
-
                 if markerCount < startingMarkerCount {
                     break
                 } else {

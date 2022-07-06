@@ -133,6 +133,16 @@ final class ListTests: XCTestCase {
 
         XCTAssertEqual(html, "<ul><li>One -Two</li><li>Three</li></ul>")
     }
+
+    func testBlogCase() {
+        let html = MarkdownParser().html(from: """
+    testline：
+    1. one
+    2. two
+    3. three
+    """)
+//        XCTAssertEqual(html, "<ul><li>One -Two</li><li>Three</li></ul>")
+    }
 }
 
 extension ListTests {

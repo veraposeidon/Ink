@@ -10,7 +10,7 @@ internal struct Paragraph: Fragment {
     private var text: FormattedText
 
     static func read(using reader: inout Reader) -> Paragraph {
-        return Paragraph(text: .read(using: &reader))
+        return Paragraph(text: .readLine(using: &reader))
     }
 
     func html(usingURLs urls: NamedURLCollection,
