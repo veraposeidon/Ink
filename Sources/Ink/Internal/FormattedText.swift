@@ -340,3 +340,9 @@ private extension FormattedText {
         }
     }
 }
+
+internal extension FormattedText {
+    mutating func addNewline() {
+        components += [Component.linebreak]
+    }
+}

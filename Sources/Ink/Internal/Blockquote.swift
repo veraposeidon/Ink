@@ -1,8 +1,10 @@
 /**
-*  Ink
-*  Copyright (c) John Sundell 2019
-*  MIT license, see LICENSE file for details
-*/
+ *  Ink
+ *  Copyright (c) John Sundell 2019
+ *  MIT license, see LICENSE file for details
+ */
+
+// MARK: - Blockquote
 
 internal struct Blockquote: Fragment {
     var modifierTarget: Modifier.Target { .blockquotes }
@@ -11,20 +13,22 @@ internal struct Blockquote: Fragment {
 
     static func read(using reader: inout Reader) throws -> Blockquote {
         try reader.read(">")
-        try reader.readWhitespaces()
+//        try reader.readWhitespaces()
 
         var text = FormattedText.readLine(using: &reader)
-
         while !reader.didReachEnd {
             switch reader.currentCharacter {
             case \.isNewline:
-                return Blockquote(text: text)
+                guard let nextC = reader.nextCharacter, nextC.isQuoteMark else {
+                    return Blockquote(text: text)
+                }
+                break
             case ">":
                 reader.advanceIndex()
             default:
                 break
             }
-
+            text.addNewline()
             text.append(FormattedText.readLine(using: &reader))
         }
 
@@ -32,7 +36,8 @@ internal struct Blockquote: Fragment {
     }
 
     func html(usingURLs urls: NamedURLCollection,
-              modifiers: ModifierCollection) -> String {
+              modifiers: ModifierCollection) -> String
+    {
         let body = text.html(usingURLs: urls, modifiers: modifiers)
         return "<blockquote><p>\(body)</p></blockquote>"
     }
@@ -40,4 +45,14 @@ internal struct Blockquote: Fragment {
     func plainText() -> String {
         text.plainText()
     }
+}
+
+internal extension Character {
+    var isQuoteMark: Bool {
+        isAny(of: .quoteMark)
+    }
+}
+
+internal extension Set where Element == Character {
+    static let quoteMark: Self = [">"]
 }
